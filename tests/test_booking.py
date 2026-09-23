@@ -32,6 +32,28 @@ class BookingServiceTests(unittest.TestCase):
                     self.service.create_booking("A", start, end, "Narin")
         self.assertEqual(self.service.list_bookings(), ())
 
+    def test_rejects_same_room_overlap(self) -> None:
+        first = self.service.create_booking("A", 540, 600, "Narin")
+        with self.assertRaises(ValueError):
+            self.service.create_booking("A", 570, 630, "Mali")
+        self.assertEqual(self.service.list_bookings(), (first,))
+
+    def test_rejects_same_room_contained_overlap(self) -> None:
+        first = self.service.create_booking("A", 540, 660, "Narin")
+        with self.assertRaises(ValueError):
+            self.service.create_booking("A", 570, 600, "Mali")
+        self.assertEqual(self.service.list_bookings(), (first,))
+
+    def test_allows_adjacent_same_room_bookings(self) -> None:
+        first = self.service.create_booking("A", 540, 600, "Narin")
+        second = self.service.create_booking("A", 600, 660, "Mali")
+        self.assertEqual(self.service.list_bookings(), (first, second))
+
+    def test_allows_overlapping_times_in_different_rooms(self) -> None:
+        first = self.service.create_booking("A", 540, 600, "Narin")
+        second = self.service.create_booking("B", 570, 630, "Mali")
+        self.assertEqual(self.service.list_bookings(), (first, second))
+
 
 if __name__ == "__main__":
     unittest.main()
