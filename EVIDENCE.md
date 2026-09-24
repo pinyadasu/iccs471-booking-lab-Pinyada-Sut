@@ -1,8 +1,8 @@
 # Booking Lab Evidence Record
 
-**Name :** Pinyada Suthisopha-aphorn
-**Student ID :** 6580511
-**Repository :** https://github.com/pinyadasu/iccs471-booking-lab-Pinyada-Sut
+- **Name :** Pinyada Suthisopha-aphorn
+- **Student ID :** 6580511
+- **Repository :** https://github.com/pinyadasu/iccs471-booking-lab-Pinyada-Sut
 
 ## Goal
 
